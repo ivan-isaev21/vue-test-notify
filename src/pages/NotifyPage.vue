@@ -71,7 +71,7 @@
       },
       getNotify() {
         axios
-          .get('https://tocode.ru/static/_secret/courses/1/notifyApi.phpd/')
+          .get('https://tocode.ru/static/_secret/courses/1/notifyApi.php/')
           .then(response => {
             let res = response.data.notify
             let messages = []

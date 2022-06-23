@@ -1,5 +1,6 @@
-# vue-cli
-
+# Notify
+## Test Notify on Vue 2, Vuex, Vue-router and load messages from external API with axios
+![](./src/assets/img/screen.PNG)
 ## Project setup
 ```
 yarn install
