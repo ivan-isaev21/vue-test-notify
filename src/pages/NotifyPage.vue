@@ -22,10 +22,19 @@
             </svg>
           </div>
 
-          <!-- notify -->
+          <!-- notify content -->
           <div class="notify__content">
+
+            <!-- preloader -->
             <preloader v-if="loading" :width="90" :height="90" />
-            <notify v-if="!loading" :messages="messages" />
+
+            <!-- error -->
+            <div class="error" v-if="error">
+              <p>{{ error }}</p>
+            </div>
+
+            <!-- notify -->
+            <notify v-if="!loading && !error" :messages="messages" />
           </div>
 
         </div>
@@ -41,7 +50,8 @@
     components: { notify, preloader },
     data() {
       return {
-        loading: true        
+        loading: true,   
+        error: null  
       }
     },
     computed:{
@@ -61,7 +71,7 @@
       },
       getNotify() {
         axios
-          .get('https://tocode.ru/static/_secret/courses/1/notifyApi.php/')
+          .get('https://tocode.ru/static/_secret/courses/1/notifyApi.phpd/')
           .then(response => {
             let res = response.data.notify
             let messages = []
@@ -82,6 +92,7 @@
             this.$store.dispatch('setMessageMain', messagesMain)      
           })
           .catch(error => {
+            this.error = "Error: Network Error"
             console.error(error)
           })
           .finally(() => (this.loading = false))
@@ -122,4 +133,11 @@
       font-size: 24px;
     }
   }
-</style>
+
+  .error{
+    text-align: center;
+    color: red;
+    vertical-align: middle;
+  }
+  
+  </style>
